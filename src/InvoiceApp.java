@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Represents an Invoice Calculator.
  *
- * @author <your group programmer names goes here>
+ * @author Shae Schmidt
  * @version 1.0 <update this to version 2>
  * @link <Your GitHub Repository URL goes here>
  */
