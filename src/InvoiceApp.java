@@ -131,31 +131,33 @@ public class InvoiceApp {
 
 
     //this is where the new method is going to go
-    private static double getDiscountAmount(double subTotal){
+    private static double getDiscountAmount(double subTotal) {
 
-        double discountPercent = 0.0;
+        double discountPercent;
+        double discountAmount = 0;
         //if statement to get discount percent
         //depending on subTotal
-        if(subTotal >= 50.0){
+
+        if (subTotal >= 50.0){
             discountPercent = 0.25;
         }
-        else if(subTotal >= 40.0){
+        else if (subTotal >= 40.0){
             discountPercent = 0.20;
         }
-        else if(subTotal >= 30.0){
+        else if (subTotal >= 30.0){
             discountPercent = 0.15;
         }
-        else if(subTotal >= 20.0){
+        else if (subTotal >= 20.0){
             discountPercent = 0.10;
         }
-        else if(subTotal >= 10.0){
+        else if (subTotal >= 10.0){
             discountPercent = 0.05;
         }
         else{
             discountPercent = 0.0;
         }
 
-        return subTotal * discountPercent;
+        return (subTotal * discountPercent);
     }
     // End new method
 
@@ -170,13 +172,15 @@ public class InvoiceApp {
         String description = "?";
         int qty = 0;
         double price = 0.0;
-
         double subTotal = 0.0;
         double receiptTotal = 0.0;
+        double discountAmount = 0;
+
 
         System.out.println(InvoiceApp.DOUBLE_DASH_LINE);
         System.out.println("Customer Receipt");
         System.out.print(InvoiceApp.DOUBLE_DASH_LINE);
+
 
         for (int i = 0; i < descriptionList.size(); i++) {
 
@@ -189,13 +193,18 @@ public class InvoiceApp {
             System.out.println();
             System.out.printf("%-20s  %3d  @  $%,6.2f = $%,8.2f\n", description, qty, price, subTotal);
 
-            if (subTotal > 0) {
-                discountAmount = InvoiceApp.getDiscountAmount(subTotal);
-            }
+         // if discount > 0
+
+
+
+          //  }
             //totalSave +=
-            receiptTotal += subTotal;
+          //  receiptTotal += subTotal;
 
         } // end of for lop
+
+       // if (discountAmount > 0)
+            System.out.printf("Discount Amount: $%,8.2f\n", discountAmount);
 
         System.out.println(InvoiceApp.SINGLE_DASH_LINE);
         //if total savings > 0 then print the savings line
