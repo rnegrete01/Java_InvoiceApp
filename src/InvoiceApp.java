@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Math.floor;
+
 /**
  * Represents an Invoice Calculator.
  *
  * @author Shae Schmidt & Rafael Negrete Fonseca
- * @version 1.0 <update this to version 2>
+ * @version 2.0
  * @link <Your GitHub Repository URL goes here>
  */
 public class InvoiceApp {
@@ -134,7 +136,6 @@ public class InvoiceApp {
     private static double getDiscountAmount(double subTotal) {
 
         double discountPercent;
-        double discountAmount = 0;
         //if statement to get discount percent
         //depending on subTotal
 
@@ -157,7 +158,7 @@ public class InvoiceApp {
             discountPercent = 0.0;
         }
 
-        return (subTotal * discountPercent);
+        return discountPercent;
     }
     // End new method
 
@@ -174,7 +175,10 @@ public class InvoiceApp {
         double price = 0.0;
         double subTotal = 0.0;
         double receiptTotal = 0.0;
-        double discountAmount = 0;
+        double discountAmount = 0.0;  // finds the total amount of money discounted from the item subtotal
+        double discountPercent = 0.0;  // finds the percentage discounted from the item subtotal
+        double savingsTotal = 0.0;  // finds the total amount saved from each item that qualifies for a discount
+
 
 
         System.out.println(InvoiceApp.DOUBLE_DASH_LINE);
@@ -190,24 +194,27 @@ public class InvoiceApp {
 
             subTotal = qty * price;
 
+            discountPercent = getDiscountAmount(subTotal);
+            discountAmount = (subTotal * discountPercent);
+            savingsTotal = (subTotal - discountAmount);
+
+
+
             System.out.println();
             System.out.printf("%-20s  %3d  @  $%,6.2f = $%,8.2f\n", description, qty, price, subTotal);
 
-         // if discount > 0
+            if (discountAmount > 0) {
+                System.out.printf("             Discount %-2.0f%%    -$%-2.2f = $%-2.2f\n", discountPercent * 100, discountAmount, savingsTotal);
+            }
+            // looks to see if an item qualifies for a discount and then displays the discount information
 
+                    receiptTotal += savingsTotal;
 
+        } // end of for loop
 
-          //  }
-            //totalSave +=
-          //  receiptTotal += subTotal;
-
-        } // end of for lop
-
-       // if (discountAmount > 0)
-            System.out.printf("Discount Amount: $%,8.2f\n", discountAmount);
 
         System.out.println(InvoiceApp.SINGLE_DASH_LINE);
-        //if total savings > 0 then print the savings line
+        System.out.printf("Total Savings: $%,8.2f\n", discountAmount); //displays the total amount of money saved
         System.out.printf("Receipt Total: $%,8.2f\n", receiptTotal);
         System.out.println(InvoiceApp.SINGLE_DASH_LINE);
 
