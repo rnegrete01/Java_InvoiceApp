@@ -177,7 +177,8 @@ public class InvoiceApp {
         double receiptTotal = 0.0;
         double discountAmount = 0.0;  // finds the total amount of money discounted from the item subtotal
         double discountPercent = 0.0;  // finds the percentage discounted from the item subtotal
-        double savingsTotal = 0.0;  // finds the total amount saved from each item that qualifies for a discount
+        double savingsAmount = 0.0;  // finds the total amount saved from each item that qualifies for a discount
+        double savingsTotal = 0.0;  // finds the total amount saved from each discounted item
 
 
 
@@ -196,7 +197,7 @@ public class InvoiceApp {
 
             discountPercent = getDiscountAmount(subTotal);
             discountAmount = (subTotal * discountPercent);
-            savingsTotal = (subTotal - discountAmount);
+            savingsAmount = (subTotal - discountAmount);
 
 
 
@@ -204,17 +205,18 @@ public class InvoiceApp {
             System.out.printf("%-20s  %3d  @  $%,6.2f = $%,8.2f\n", description, qty, price, subTotal);
 
             if (discountAmount > 0) {
-                System.out.printf("             Discount %-2.0f%%    -$%-2.2f = $%-2.2f\n", discountPercent * 100, discountAmount, savingsTotal);
+                System.out.printf("             Discount %-2.0f%%    -$%-2.2f = $%-2.2f\n", discountPercent * 100, discountAmount, savingsAmount);
             }
             // looks to see if an item qualifies for a discount and then displays the discount information
 
-                    receiptTotal += savingsTotal;
+                    savingsTotal += discountAmount;
+                    receiptTotal += savingsAmount;
 
         } // end of for loop
 
 
         System.out.println(InvoiceApp.SINGLE_DASH_LINE);
-        System.out.printf("Total Savings: $%,8.2f\n", discountAmount); //displays the total amount of money saved
+        System.out.printf("Total Savings: $%,8.2f\n", savingsTotal); //displays the total amount of money saved
         System.out.printf("Receipt Total: $%,8.2f\n", receiptTotal);
         System.out.println(InvoiceApp.SINGLE_DASH_LINE);
 
